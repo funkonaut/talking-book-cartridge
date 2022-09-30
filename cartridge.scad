@@ -2,6 +2,8 @@
 //Date: 9/5/2022
 //Description: Joy Player replacement cartridge for easy flash drive swabbing
 
+include <MCAD/3d_triangle.scad>
+
 $fn = 40;
 e=.01;
 
@@ -10,11 +12,11 @@ x = 95;
 y = 57;
 z = 9.75;
 hole_r = 19/2;
-hole_off = 5.25;
+hole_off = 5.5; //5.25 changed
 hole_h = z+e;
 lip_off_x = 2.5;
 lip_off_y = 2.5;
-lip_off_z = .5;
+lip_off_z = .5;//from .5
 
 //guide slots
 slot_length = 48; 
@@ -23,7 +25,7 @@ slot_r = 5.5;
 //cut out for flash drive
 cut_x = 50.5;
 cut_y = 19;
-cut_z = 8.75; 
+cut_z = 8.5;  //from 8.75 
 cut_hole_r = 9.5/2;
 cut_hole_h = 8.75;
 cut_hole_off = 15.25; 
@@ -33,6 +35,12 @@ cut_hole_off = 15.25;
 drive_off_x = 12;
 drive_off_y = 3.5;
 drive_off_thick = 2;
+
+module right_triangle(a,b,h){
+    linear_extrude(h){
+    polygon(points = [ [a, 0], [0,b], [a,b]],  convexity = 1);
+}
+}
 
 module rounded_cube(w,l,z,rad1,rad2){
     hull(){
@@ -61,6 +69,7 @@ rounded_cube(x,y,z,10,10);
 translate([0,0,z-lip_off_z])
 rounded_cube(x-lip_off_x,y-lip_off_y,z,10,10);
 
+union(){
 //holder hole
 translate([-x/2+hole_r+hole_off,0,0])
 cylinder(r = hole_r, h = hole_h, center=true);
@@ -80,5 +89,14 @@ cylinder(r=slot_r,h=slot_length,center=true);
 translate([x/2-cut_x/2,y/2,-z/2])
 rotate([0,90,0])
 cylinder(r=slot_r,h=slot_length,center=true);
+}
+
+//angeled back
+b = 13.25;
+a = 7;
+translate([b-x/2,-y/2,a-z/2])
+//translate([b/2,-y/2,z/2-a/2])
+rotate([90,90,180])
+right_triangle(a,b,y);
 }
 }
