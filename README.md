@@ -14,6 +14,9 @@
 ## Why?
 While the Joy Player does have a usb port in the back, not every student is able to plug in flash drives correctly. The cartridge enables student's independnece but cost $14 and is not availble for purchase with quota funds. Our schools librarian was sick of spending $14 on each lost cartridge as students go through them and wanted a cost effective alternative. This model provides not only a cost effective solution but also an improvement on the original cartridge design. USB drives can be swapped for more or less storage, no need for a male to female usb cable to load cartridges, simply remove the usb drive and plug into the computer like any other flash storage. Also the OpenSCAD code is fully customizable and open source so one can add text, braille, or other tactile markers to the cartridge!
 
+## Print Settings
+.15 layer height, 15% infill, with supports and normal PLA settings provide great results takes ~2 hours to print and uses ~22g of filament (~$.60)
+
 ## To Do
 - Longivity test with students
 - Add tactile marker options 

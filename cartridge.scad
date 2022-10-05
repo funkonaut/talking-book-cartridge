@@ -16,7 +16,9 @@ hole_off = 5.5; //5.25 changed
 hole_h = z+e;
 lip_off_x = 2.5;
 lip_off_y = 2.5;
-lip_off_z = .5;//from .5
+lip_off_z = .5;//from .5 ~ also text thickness
+msg = "Rock"; //limit to 10 chars?
+txt_off = 30;
 
 //guide slots
 slot_length = 48; 
@@ -55,8 +57,21 @@ module rounded_cube(w,l,z,rad1,rad2){
     };
 }
 
-//stops for flash drive
+module gen_text(msg,x_bbox, y_bbox, thickness){
+ num_letters = len(msg);
+ size = x_bbox/num_letters;
+linear_extrude(thickness){
+ text(msg,size,halign="center",valign="top");
+}
+}
+
 union(){
+//Text 
+translate([-x/2+txt_off,0,z/2])
+rotate([0,0,90])
+gen_text(msg,y,x/4,lip_off_z);
+
+//stops for flash drive
 translate([x/2+drive_off_thick/2-drive_off_x,drive_off_x-drive_off_y,-lip_off_z/2])
 cube([drive_off_thick, drive_off_y, z-lip_off_z],center=true);
 translate([x/2+drive_off_thick/2-drive_off_x,-drive_off_x+drive_off_y,-lip_off_z/2])
